@@ -102,6 +102,7 @@ namespace config {
       int vt_allow_sw;  ///< Whether VideoToolbox may use software encoding.
       int vt_require_sw;  ///< Whether VideoToolbox must use software encoding.
       int vt_realtime;  ///< Whether VideoToolbox uses realtime encoding mode.
+      int vt_low_latency;  ///< Whether VideoToolbox uses low-latency rate control (one frame in flight).
       int vt_coder;  ///< VideoToolbox entropy-coding mode.
     } vt;  ///< VideoToolbox encoder options.
 

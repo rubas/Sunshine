@@ -3043,6 +3043,42 @@ editing the `conf` file in a text editor. Use the examples as reference.
     </tr>
 </table>
 
+### vt_low_latency
+
+<table>
+    <tr>
+        <td>Description</td>
+        <td colspan="2">
+            Low-latency rate control. VideoToolbox encodes one frame at a time, which minimizes encode latency
+            but caps the frame rate at high resolutions and bitrates. Disable it if the stream cannot reach the
+            requested frame rate, for example HEVC at 5K.
+            @note{This option only applies when using macOS.}
+            @warning{Disabling low-latency rate control adds about one frame of encode latency.}
+        </td>
+    </tr>
+    <tr>
+        <td>Default</td>
+        <td colspan="2">@code{}
+            on
+            @endcode</td>
+    </tr>
+    <tr>
+        <td>Example</td>
+        <td colspan="2">@code{}
+            vt_low_latency = on
+            @endcode</td>
+    </tr>
+    <tr>
+        <td rowspan="2">Choices</td>
+        <td>on</td>
+        <td>one frame in flight, lowest latency</td>
+    </tr>
+    <tr>
+        <td>off</td>
+        <td>pipelined encoding, highest throughput</td>
+    </tr>
+</table>
+
 ## VA-API Encoder
 
 ### vaapi_blbrc

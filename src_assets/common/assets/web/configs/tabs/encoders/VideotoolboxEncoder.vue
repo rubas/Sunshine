@@ -37,6 +37,12 @@ const config = ref(props.config)
               v-model="config.vt_realtime"
               default="true"
     ></Checkbox>
+    <Checkbox class="mb-3"
+              id="vt_low_latency"
+              locale-prefix="config"
+              v-model="config.vt_low_latency"
+              default="true"
+    ></Checkbox>
   </div>
 </template>
 
