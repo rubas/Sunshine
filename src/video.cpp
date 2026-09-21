@@ -1370,6 +1370,18 @@ namespace video {
 
 #ifdef __APPLE__
   /**
+   * @brief Resolve the VideoToolbox low-latency rate-control flag from configuration.
+   *
+   * AV_CODEC_FLAG_LOW_DELAY maps to kVTVideoEncoderSpecification_EnableLowLatencyRateControl,
+   * which encodes one frame at a time on Apple Silicon and caps throughput at high resolutions.
+   *
+   * @return Flags string that sets or clears low_delay on the codec context.
+   */
+  const std::string vt_low_delay_flags(const config_t &) {
+    return config::video.vt.vt_low_latency ? "+low_delay"s : "-low_delay"s;
+  }
+
+  /**
    * @brief Videotoolbox.
    */
   encoder_t videotoolbox {
@@ -1390,6 +1402,7 @@ namespace video {
         {"allow_sw"s, &config::video.vt.vt_allow_sw},
         {"require_sw"s, &config::video.vt.vt_require_sw},
         {"realtime"s, &config::video.vt.vt_realtime},
+        {"flags"s, vt_low_delay_flags},
         {"prio_speed"s, 1},
         {"max_ref_frames"s, 1},
       },
@@ -1407,6 +1420,7 @@ namespace video {
         {"allow_sw"s, &config::video.vt.vt_allow_sw},
         {"require_sw"s, &config::video.vt.vt_require_sw},
         {"realtime"s, &config::video.vt.vt_realtime},
+        {"flags"s, vt_low_delay_flags},
         {"prio_speed"s, 1},
         {"max_ref_frames"s, 1},
       },
