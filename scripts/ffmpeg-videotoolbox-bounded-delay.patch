@@ -1,0 +1,21 @@
+--- a/libavcodec/videotoolboxenc.c
++++ b/libavcodec/videotoolboxenc.c
+@@ -2577,7 +2577,17 @@
+         goto end_nopkt;
+     }
+ 
+-    status = vtenc_q_pop(vtctx, !frame, &buf, &sei);
++    /*
++     * This callback returns at most one packet per input frame, so every
++     * packet that queues up during a stall stays queued for the rest of the
++     * session and adds its frame time to the latency of every later frame.
++     * Once more than three frames are pending, wait for the oldest: three
++     * keep 5120x2880 at 60 frames per second on an Apple M4 Pro, two drop it
++     * to about 45.
++     */
++    status = vtenc_q_pop(vtctx, !frame || (!vtctx->has_b_frames &&
++                                           vtctx->frame_ct_in - vtctx->frame_ct_out > 3),
++                         &buf, &sei);
+     if (status) goto end_nopkt;
+     if (!buf)   goto end_nopkt;
+ 
