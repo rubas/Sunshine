@@ -384,8 +384,10 @@ namespace platf {
     capture_e capture(const push_captured_image_cb_t &push_captured_image_cb, const pull_free_image_cb_t &pull_free_image_cb, bool *cursor) override {
       auto signal = [sc_capture captureVideo];
       if (!signal) {
+        // The display is gone (a virtual display was removed, a monitor unplugged): let the
+        // capture thread re-enumerate displays and retry instead of ending the session.
         BOOST_LOG(error) << "SCCapture failed to start video capture"sv;
-        return capture_e::error;
+        return capture_e::reinit;
       }
       dispatch_retain(signal);
 
@@ -409,7 +411,9 @@ namespace platf {
         auto frame_status = dispatch_semaphore_wait(frame_signal, dispatch_time(DISPATCH_TIME_NOW, SCKIT_FRAME_POLL_INTERVAL_NS));
         (void) frame_status;
         if (dispatch_semaphore_wait(signal, DISPATCH_TIME_NOW) == 0) {
-          break;
+          // Only an unexpected stream stop signals here; an intended stop leaves through the
+          // pull/push checks below. Reinitialize so video resumes when the display returns.
+          return capture_e::reinit;
         }
 
         CMSampleBufferRef sample_buffer = [sc_capture copyLatestSampleBuffer];
