@@ -69,9 +69,10 @@ typedef bool (^FrameCallbackBlock)(CMSampleBufferRef);
  *
  * @param displayID Display ID.
  * @param frameRate Frame rate.
+ * @param showsCursor Whether the frames include the cursor.
  * @return Initialized AVVideo instance, or nil on failure.
  */
-- (id)initWithDisplay:(CGDirectDisplayID)displayID frameRate:(int)frameRate;
+- (id)initWithDisplay:(CGDirectDisplayID)displayID frameRate:(int)frameRate showsCursor:(BOOL)showsCursor;
 
 /**
  * @brief Set frame width frame height.

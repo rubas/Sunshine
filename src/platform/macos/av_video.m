@@ -7,7 +7,7 @@
 
 @implementation AVVideo
 
-- (id)initWithDisplay:(CGDirectDisplayID)displayID frameRate:(int)frameRate {
+- (id)initWithDisplay:(CGDirectDisplayID)displayID frameRate:(int)frameRate showsCursor:(BOOL)showsCursor {
   self = [super init];
 
   CGDisplayModeRef mode = CGDisplayCopyDisplayMode(displayID);
@@ -30,6 +30,7 @@
 
   AVCaptureScreenInput *screenInput = [[AVCaptureScreenInput alloc] initWithDisplayID:self.displayID];
   [screenInput setMinFrameDuration:self.minFrameDuration];
+  screenInput.capturesCursor = showsCursor;
 
   if ([self.session canAddInput:screenInput]) {
     [self.session addInput:screenInput];

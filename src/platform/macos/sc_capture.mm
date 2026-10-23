@@ -84,13 +84,15 @@ API_AVAILABLE(macos(14.0))
 }
 
 - (instancetype)initWithDisplay:(CGDirectDisplayID)displayID
-                      frameRate:(int)frameRate {
+                      frameRate:(int)frameRate
+                    showsCursor:(BOOL)showsCursor {
   self = [super init];
   if (self) {
     CGDisplayModeRef mode = CGDisplayCopyDisplayMode(displayID);
 
     self.displayID = displayID;
     self.frameRate = frameRate;
+    self.showsCursor = showsCursor;
     self.pixelFormat = kCVPixelFormatType_32BGRA;
 
     if (mode) {
@@ -262,7 +264,7 @@ API_AVAILABLE(macos(14.0))
     config.width = self.frameWidth;
     config.height = self.frameHeight;
     config.pixelFormat = self.pixelFormat;
-    config.showsCursor = YES;
+    config.showsCursor = self.showsCursor;
     config.captureResolution = SCCaptureResolutionBest;
     config.preservesAspectRatio = YES;
     // Slightly below the target interval: an interval of exactly 1/fps beats against

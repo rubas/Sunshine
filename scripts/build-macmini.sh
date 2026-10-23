@@ -7,6 +7,9 @@ cd "$(dirname "$0")/.."
 export PATH=/opt/homebrew/bin:$PATH
 brew install cmake ninja pkg-config openssl@3 curl miniupnpc opus boost node qt
 git submodule update --init --recursive
+# The build dir caches SDK paths. Pin the Command Line Tools, so a switch of xcode-select to
+# Xcode does not mix its SDK with the cached one (libc++ then fails to find its C headers).
+export DEVELOPER_DIR=/Library/Developer/CommandLineTools
 export CC=/usr/bin/clang CXX=/usr/bin/clang++
 export MACOSX_DEPLOYMENT_TARGET=15.0
 export PKG_CONFIG_PATH=/opt/homebrew/opt/curl/lib/pkgconfig:/opt/homebrew/opt/openssl@3/lib/pkgconfig

@@ -50,6 +50,10 @@ API_AVAILABLE(macos(14.0))
  * @brief Output frame height property.
  */
 @property (nonatomic, assign) int frameHeight;
+/**
+ * @brief Whether ScreenCaptureKit draws the cursor into the frames.
+ */
+@property (nonatomic, assign) BOOL showsCursor;
 
 /**
  * @brief Content filter selecting the captured display.
@@ -110,10 +114,12 @@ API_AVAILABLE(macos(14.0))
  *
  * @param displayID Display to capture.
  * @param frameRate Requested capture frame rate.
+ * @param showsCursor Whether the frames include the cursor.
  * @return Initialized instance, or nil on failure.
  */
 - (instancetype)initWithDisplay:(CGDirectDisplayID)displayID
-                      frameRate:(int)frameRate;
+                      frameRate:(int)frameRate
+                    showsCursor:(BOOL)showsCursor;
 
 /**
  * @brief Set the capture output dimensions.

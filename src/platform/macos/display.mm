@@ -570,7 +570,7 @@ namespace platf {
         auto display = std::make_shared<sc_display_t>();
         display->display_id = display_id;
         display->display_power_guard = std::move(display_power_guard);
-        display->sc_capture = [[SCCapture alloc] initWithDisplay:display_id frameRate:config.framerate];
+        display->sc_capture = [[SCCapture alloc] initWithDisplay:display_id frameRate:config.framerate showsCursor:config::video.macos_capture_cursor];
 
         if (display->sc_capture) {
           display->width = display->sc_capture.frameWidth;
@@ -597,7 +597,7 @@ namespace platf {
     display->display_id = display_id;
     display->display_power_guard = std::move(display_power_guard);
 
-    display->av_capture = [[AVVideo alloc] initWithDisplay:display->display_id frameRate:config.framerate];
+    display->av_capture = [[AVVideo alloc] initWithDisplay:display->display_id frameRate:config.framerate showsCursor:config::video.macos_capture_cursor];
 
     if (!display->av_capture) {
       BOOST_LOG(error) << "Video setup failed."sv;

@@ -1449,6 +1449,32 @@ editing the `conf` file in a text editor. Use the examples as reference.
     </tr>
 </table>
 
+### macos_capture_cursor
+
+<table>
+    <tr>
+        <td>Description</td>
+        <td colspan="2">
+            Draw the cursor into the captured frames. Disable it when the client draws its own pointer, such as
+            Moonlight in remote desktop mouse mode after Ctrl+Alt+Shift+C. The client pointer then follows the hand
+            without the encode latency.
+            @note{This option only applies when using macOS.}
+        </td>
+    </tr>
+    <tr>
+        <td>Default</td>
+        <td colspan="2">@code{}
+            enabled
+            @endcode</td>
+    </tr>
+    <tr>
+        <td>Example</td>
+        <td colspan="2">@code{}
+            macos_capture_cursor = disabled
+            @endcode</td>
+    </tr>
+</table>
+
 ## Network
 
 ### upnp
