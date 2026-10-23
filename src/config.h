@@ -205,6 +205,7 @@ namespace config {
 
     int max_bitrate;  ///< Maximum bitrate ceiling in kbps for bitrate requested from the client.
     double minimum_fps_target;  ///< Lowest framerate that will be used when streaming. Range 0-1000, 0 = half of client's requested framerate.
+    bool macos_capture_cursor;  ///< Whether macOS draws the cursor into the captured frames.
   };
 
   /**

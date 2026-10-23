@@ -286,6 +286,8 @@
     "max_bitrate_desc": "The maximum bitrate (in Kbps) that Sunshine will encode the stream at. If set to 0, it will always use the bitrate requested by Moonlight.",
     "minimum_fps_target": "Minimum FPS Target",
     "minimum_fps_target_desc": "The lowest effective FPS a stream can reach. A value of 0 is treated as roughly half of the stream's FPS. A setting of 20 is recommended if you stream 24 or 30fps content.",
+    "macos_capture_cursor": "Draw the Cursor Into the Video",
+    "macos_capture_cursor_desc": "Disable it when the client draws its own pointer, such as Moonlight in remote desktop mouse mode after Ctrl+Alt+Shift+C. The host pointer then no longer trails the hand by the encode latency.",
     "min_log_level": "Log Level",
     "min_log_level_0": "Verbose",
     "min_log_level_1": "Debug",
